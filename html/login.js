@@ -4,7 +4,7 @@ function validate(){
     var password=document.getElementById("password").value;
     if(username=="Admin" && password=="passwordsmarthome"){
         alert("Ingreso Exitosamente!");
-        window.location="index.html";
+        window.location="index2.html";
         return false;
     }
     else{
