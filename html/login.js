@@ -2,9 +2,9 @@ var attempt = 3;
 function validate(){
     var usuar=document.getElementById("username").value;
     var password=document.getElementById("password").value;
-    if(usuar=="Admin" && password=="passwordsmarthome"){
+    if(username=="Admin" && password=="passwordsmarthome"){
         alert("Ingreso Exitosamente!");
-        window.location="index2.html";
+        window.location="index.html";
         return false;
     }
     else{
