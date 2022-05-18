@@ -1,7 +1,9 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
     margin:0; 
-    background:url(fondo.jpeg);
+    background:url(fondo.jpg);
+    background-size: cover;
+    background-attachment: fixed;
 }
 *{
     box-sizing: border-box;
