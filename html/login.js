@@ -14,7 +14,7 @@ function validate(){
     if(attempt==0){
         document.getElementById("username").disable = true;
         document.getElementById("password").disable = true;
-        document.getElementById("sumbit").disable = true;
+        document.getElementById("submit").disable = true;
     }
 
 }
