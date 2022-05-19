@@ -12,9 +12,9 @@ function validate(){
     }
     alert("Intentos restantes:"+attempt+".")
     if(attempt==0){
-        document.getElementById("username").disable=true;
-        document.getElementById("password").disable=true;
-        document.getElementById("sumbit").disable=true;
+        document.getElementById("username").disable = true;
+        document.getElementById("password").disable = true;
+        document.getElementById("sumbit").disable = true;
     }
 
 }
