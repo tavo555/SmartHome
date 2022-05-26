@@ -14,12 +14,17 @@ import RPi.GPIO as GPIO
 from time import sleep
 import smbus2
 import struct
+import threading 
+from datetime import datetime
 # Arduino’s I2C device address
 SLAVE_ADDR = 0x0A # I2C Address of Arduino 1
 
 # Initialize the I2C bus;
 # RPI version 1 requires smbus.SMBus(0)
 i2c = smbus2.SMBus(1)
+time_corto="00:00"
+bandera3=False
+bandera4=False
 class interval_exceeded_percent(Exception):
     def __init__(self, value ,mensaje=None):
         mensaje='\n The number {} exceeded the interval value of percent 20-100.'.format(value)#guarda mensaje
@@ -79,13 +84,13 @@ def timbre():
 """
 def focos(num):
 	try:
+		GPIO.setup(18, GPIO.OUT, initial=GPIO.HIGH)
 		if(num==1):
-			GPIO.setup(18, GPIO.OUT, initial=GPIO.LOW)
-			GPIO.output(18,0)  # Turn leds off
-			sleep(1.0)
+			GPIO.output(18,0)  # Turn on
+			sleep(0.2)
 		else:
-			GPIO.output(18,1)  # Turn leds off
-			sleep(1.0)
+			GPIO.output(18,1)  # Turn off
+			sleep(0.2)
 	except:
 		pass
 def dimmer_start(pf_web):
@@ -107,4 +112,41 @@ def dimmer_start(pf_web):
 	except interval_exceeded_percent as ie:
 			print(ie)
 			return
+def compara_tiempos(time):
+	global time_corto
+	global bandera3
+	global bandera4
+	try:
+		if(bandera4==False):
+			GPIO.setup(18, GPIO.OUT, initial=GPIO.HIGH)
+			bandera4=True
+		s=time
+		lista= s.split(' ')
+		time_corto = (lista[0])# guardamos el porcentaje deseado
+		on_off = int(lista[1])#guardamos el tiempo de espera
+		print(time_corto)
+		print(on_off)
+		now=datetime.now().strftime('%H:%M')
+		print(now)
+		print(now[4])
+		while(bandera3!=True):
+			try:
+				now=datetime.now().strftime('%H:%M')
+				if(time_corto == now):
+					print("entro")
+					if(on_off==300):
+						GPIO.output(18,0)  # Turn on
+					else:
+						GPIO.output(18,1)  # Turn off
+					bandera3=True
+			except:
+				print("no se pudo")
+	except:
+		print("no hay hora")
+def tiempo(time):
+	dataCollector2 = threading.Thread(target= compara_tiempos, args =(time,))
+	dataCollector2.start() #comienze el hilo
+	
+
+	
 	
