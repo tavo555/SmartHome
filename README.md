@@ -6,6 +6,10 @@ Rivera Arellanos Josue david
 Martinez Rojas Jose Eduardo
 
 Instalación
+Puedes llevar a cabo la instalación utilizando la siguiente línea con el archivo sin embargo te recomendamos revisar la instalación modular para que pueda correr correctamente
+
+pip install --user -r requirements.txt
+
 Para llevar acabo la instalacion es necesario tener:
 sistema operativo linux
 lenguaje
